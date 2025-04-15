@@ -1,0 +1,24 @@
+[build]
+builder = "nixpacks"
+buildCommand = "pip install -r requirements.txt"
+
+[deploy]
+startCommand = "python webui.py --ip 0.0.0.0 --port $PORT"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 5
+
+[environments]
+web_basic.memory = "1024"
+web_medium.memory = "2048"
+
+# For the browser automation to work properly in Railway
+[environments.main.variables]
+BROWSER_USE_LOGGING_LEVEL = "info"
+CHROME_PATH = "/ms-playwright/chromium-*/chrome-linux/chrome"
+ANONYMIZED_TELEMETRY = "false"
+DISPLAY = ":99"
+RESOLUTION = "1920x1080x24" 
+VNC_PASSWORD = "railwayvncpass"
+CHROME_PERSISTENT_SESSION = "true"
+RESOLUTION_WIDTH = "1920"
+RESOLUTION_HEIGHT = "1080"
